@@ -124,8 +124,8 @@ void Commuter::Behavior(){
 				goto wait1;
 			}
 			Passivate();
-			//if(!leaveInKurim())
-			//	((Train*)(KurimToBrnoStation.in))->joinTrain(this);
+			if(!leaveInKurim())
+				((Train*)(KurimToBrnoStation.in))->joinTrain(this);
 			break;
 		case KURIMT: 
 			KurimToTisnovQ.Insert(this);
@@ -153,8 +153,8 @@ void Commuter::Behavior(){
 				goto wait4;
 			}
 			Passivate();
-			//if(!leaveInKurim())
-			//	((Train*)(KurimToTisnovStation.in))->joinTrain(this);
+			if(!leaveInKurim())
+				((Train*)(KurimToTisnovStation.in))->joinTrain(this);
 			break;
 	}
 }
