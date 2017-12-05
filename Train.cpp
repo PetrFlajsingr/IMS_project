@@ -92,7 +92,7 @@ double Train::generateDelay(){
  */
 void Train::TisnovToBrno(){
 	Seize(TisnovToKurimStation);
-	prichoziTisnov(TisnovToKurimQ.Length());
+	incomingTisnov(TisnovToKurimQ.Length());
 	activateAllInQueue(&TisnovToKurimQ); //nastup cestujicich
 	Wait(1);
 	Release(TisnovToKurimStation);
@@ -104,6 +104,7 @@ void Train::TisnovToBrno(){
 	Wait(TISNOV_KURIM_TIME + delay); //cesta do Kurima
 
 	Seize(KurimToBrnoStation);
+	incomingKurimBrno(KurimToBrnoQ.Length());
 	activateAllInQueue(&KurimToBrnoQ); //nastup cestujicich
 	activateAllInQueue(&people); //vystup cestujicich
 	Wait(1);
@@ -126,6 +127,7 @@ void Train::TisnovToBrno(){
  */
 void Train::BrnoToTisnov(){
 	Seize(BrnoToKurimStation);
+	incomingBrno(BrnoToKurimQ.Length());
 	activateAllInQueue(&BrnoToKurimQ); //nastup cestujicich
 	Wait(1);
 	Release(BrnoToKurimStation);
@@ -137,6 +139,7 @@ void Train::BrnoToTisnov(){
 	Wait(KURIM_BRNO_TIME + delay);
 
 	Seize(KurimToTisnovStation);
+	incomingKurimTisnov(KurimToTisnovQ.Length());
 	activateAllInQueue(&KurimToTisnovQ); //nastup cestujicich
 	activateAllInQueue(&people); //vystup cestujicich
 	Wait(1);

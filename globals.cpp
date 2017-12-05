@@ -30,7 +30,10 @@ Stat trainFullnessStatWorkNight("Zaplneni vlaku - pracovni noc");
 Stat trainFullnessStatWeekendDay("Zaplneni vlaku - vikend den");
 Stat trainFullnessStatWeekendNight("Zaplneni vlaku - vikend noc");
 
-Stat prichoziTisnov("Prichozi Tisnov");
+Stat incomingTisnov("Prichozi Tisnov");
+Stat incomingKurimTisnov("Prichozi Kurim->Tisnov");
+Stat incomingKurimBrno("Prichozi Kurim->Brno");
+Stat incomingBrno("Prichozi Brno");
 
 Histogram peopleLeavingHist("Odchozi z nastupiste", 0, DAY_LENGTH, SIMULATION_TIME_IN_DAYS);
 

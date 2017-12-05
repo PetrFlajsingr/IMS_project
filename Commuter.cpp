@@ -18,6 +18,7 @@ void Timeout::Behavior(){
 		Id->Cancel();
 		Cancel();
 	} else {
+		dt /= 2;
 		Activate(Time + this->dt);
 	}
 }

@@ -30,7 +30,10 @@ int main(){
  	trainFullnessStatWeekendDay.Output();
  	trainFullnessStatWeekendNight.Output();
  	peopleLeavingHist.Output();
- 	prichoziTisnov.Output();
+ 	incomingTisnov.Output();
+ 	incomingKurimTisnov.Output();
+	incomingKurimBrno.Output();
+	incomingBrno.Output();
 
 	return 0;
 }

@@ -27,7 +27,10 @@ extern Stat trainFullnessStatWorkNight;
 extern Stat trainFullnessStatWeekendDay;
 extern Stat trainFullnessStatWeekendNight;
 
-extern Stat prichoziTisnov;
+extern Stat incomingTisnov;
+extern Stat incomingKurimTisnov;
+extern Stat incomingKurimBrno;
+extern Stat incomingBrno;
 
 extern Histogram TisnovToKurimQHist;
 extern Histogram peopleLeavingHist;
