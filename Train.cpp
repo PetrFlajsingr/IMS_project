@@ -2,6 +2,7 @@
 #include <simlib.h>
 #include "Timer.h"
 #include "globals.h"
+#include <iostream>
 using namespace simlib3;
 
 /**
@@ -63,7 +64,6 @@ void Train::Behavior(){
 bool Train::joinTrain(Commuter* person){
 	if(people.Length() == this->capacity)
 		return false;
-
 	people.Insert(person);
 	return true;
 }
