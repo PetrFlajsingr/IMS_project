@@ -27,7 +27,10 @@ extern Stat trainFullnessStatWorkNight;
 extern Stat trainFullnessStatWeekendDay;
 extern Stat trainFullnessStatWeekendNight;
 
+extern Stat prichoziTisnov;
+
 extern Histogram TisnovToKurimQHist;
+extern Histogram peopleLeavingHist;
 
 enum STATION {TISNOV, KURIMT, KURIMB, BRNO}; 
 

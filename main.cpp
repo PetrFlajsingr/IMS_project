@@ -29,6 +29,8 @@ int main(){
  	trainFullnessStatWorkNight.Output();
  	trainFullnessStatWeekendDay.Output();
  	trainFullnessStatWeekendNight.Output();
+ 	peopleLeavingHist.Output();
+ 	prichoziTisnov.Output();
 
 	return 0;
 }

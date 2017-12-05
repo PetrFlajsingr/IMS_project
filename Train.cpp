@@ -73,8 +73,8 @@ bool Train::joinTrain(Commuter* person){
  * @return zpozdeni vlaku v minutach.
  */
 double Train::generateDelay(){
-	const double MINOR_THRESHOLD = 0.35; //%
-	const double MAJOR_THRESHOLD = MINOR_THRESHOLD + 0.10; //%
+	const double MINOR_THRESHOLD = 0.15; //%
+	const double MAJOR_THRESHOLD = MINOR_THRESHOLD + 0.05; //%
 	const double BREAKDOWN_THRESHOLD = MAJOR_THRESHOLD + 0.01; //%
 	double chance = Random();
 
@@ -92,6 +92,7 @@ double Train::generateDelay(){
  */
 void Train::TisnovToBrno(){
 	Seize(TisnovToKurimStation);
+	prichoziTisnov(TisnovToKurimQ.Length());
 	activateAllInQueue(&TisnovToKurimQ); //nastup cestujicich
 	Wait(1);
 	Release(TisnovToKurimStation);

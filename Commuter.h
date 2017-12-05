@@ -20,6 +20,8 @@ private:
 	STATION from; //< pocatecni stanice cestujiciho
 
 	bool leaveInKurim();
+
+	double getTimeoutValue();
 public:
 	void Behavior();
 

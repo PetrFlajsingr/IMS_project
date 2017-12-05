@@ -14,6 +14,7 @@ Timeout::Timeout(Commuter* person, double dt): Id(person), dt(dt){
 
 void Timeout::Behavior(){
 	if(Random() < PROB_TO_LEAVE) {
+		peopleLeavingHist(Time);
 		Id->Cancel();
 		Cancel();
 	} else {
@@ -31,29 +32,6 @@ CommuterGenerator::CommuterGenerator(STATION from){
 void CommuterGenerator::Behavior(){
 	(new Commuter(this->from))->Activate();
 	Activate(Time + Exponential(nextProb()));
-	/*switch(Timer::getDayType(Time)){
-		case WORKDAY:
-			switch(Timer::getDayTime(Time)){
-				case DAY:
-					Activate(Time + Exponential(nextProb()));
-					break;
-				case NIGHT:
-					Activate(Time + Exponential(nextProb()));
-					break;
-			}
-			break;
-		case WEEKEND:
-			switch(Timer::getDayTime(Time)){
-				case DAY:
-					Activate(Time + Exponential(nextProb()));
-					break;
-				case NIGHT:
-					Activate(Time + Exponential(nextProb()));
-					break;
-			}
-			break;
-		default: break;
-	}*/
 }
 
 double CommuterGenerator::nextProb(){
@@ -92,7 +70,6 @@ double CommuterGenerator::nextProb(){
 			break;
 		default: break;
 	}
-
 }
 
 Commuter::Commuter(STATION from){
@@ -109,11 +86,36 @@ bool Commuter::leaveInKurim(){
 	return false;
 }
 
+double Commuter::getTimeoutValue(){
+	switch(Timer::getDayType(Time)){
+		case WORKDAY:
+			switch(Timer::getDayTime(Time)){
+				case DAY:
+					return WORK_DAY_WAITING;
+					break;
+				case NIGHT:
+					return WORK_NIGHT_WAITING;
+					break;
+			}
+			break;
+		case WEEKEND:
+			switch(Timer::getDayTime(Time)){
+				case DAY:
+					return WEEKEND_DAY_WAITING;
+					break;
+				case NIGHT:
+					return WEEKEND_NIGHT_WAITING;
+					break;
+			}
+			break;
+		default: break;
+	}
+}
 /**
  * Cesta cestujiciho. Odviji se podle nastupni stanice.
  */
 void Commuter::Behavior(){
-	//Timeout* t = new Timeout(this, Exponential(20));
+	Timeout* t = new Timeout(this, getTimeoutValue());
 	switch(this->from){
 		case TISNOV: 
 			TisnovToKurimQHist(Time);
@@ -123,6 +125,7 @@ void Commuter::Behavior(){
 			if(!((Train*)(TisnovToKurimStation.in))->joinTrain(this)){
 				goto wait1;
 			}
+			t->Cancel();
 			Passivate();
 			if(!leaveInKurim())
 				((Train*)(KurimToBrnoStation.in))->joinTrain(this);
@@ -134,6 +137,7 @@ void Commuter::Behavior(){
 			if(!((Train*)(KurimToTisnovStation.in))->joinTrain(this)){
 				goto wait2;
 			}
+			t->Cancel();
 			Passivate();
 			break;
 		case KURIMB: 
@@ -143,6 +147,7 @@ void Commuter::Behavior(){
 			if(!((Train*)(KurimToBrnoStation.in))->joinTrain(this)){
 				goto wait3;
 			}
+			t->Cancel();
 			Passivate();
 			break;
 		case BRNO: 
@@ -152,6 +157,7 @@ void Commuter::Behavior(){
 			if(!((Train*)(BrnoToKurimStation.in))->joinTrain(this)){
 				goto wait4;
 			}
+			t->Cancel();
 			Passivate();
 			if(!leaveInKurim())
 				((Train*)(KurimToTisnovStation.in))->joinTrain(this);
