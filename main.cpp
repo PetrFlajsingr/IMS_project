@@ -24,7 +24,6 @@ int main(){
 	Run();
 
 	trainStat.Output();
-	TisnovToKurimQHist.Output();
 	trainFullnessStatWorkDay.Output();
  	trainFullnessStatWorkNight.Output();
  	trainFullnessStatWeekendDay.Output();
